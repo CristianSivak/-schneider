@@ -1,0 +1,10 @@
+Django==6.0.*
+djangorestframework==3.17.*
+django-cors-headers==4.*
+gunicorn==26.*
+psycopg2-binary==2.9.*
+requests==2.*
+dj-database-url==3.*
+django-environ==0.*
+pytest==9.*
+pytest-django==4.*
