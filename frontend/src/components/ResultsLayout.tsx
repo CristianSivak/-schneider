@@ -21,9 +21,11 @@ export default function ResultsLayout({ trip }: { trip: Trip }) {
               </div>
             </div>
             <div>
-              <div className="text-xs uppercase tracking-wide text-gray-400">Drive time</div>
+              <div className="text-xs uppercase tracking-wide text-gray-400">Total trip time</div>
               <div className="font-semibold text-gray-900">
-                {trip.total_duration_hours != null ? `${trip.total_duration_hours.toFixed(1)} hr` : '—'}
+                {trip.total_duration_hours != null
+                  ? `${trip.total_duration_hours.toFixed(1)} hr (${(trip.total_duration_hours / 24).toFixed(1)} days)`
+                  : '—'}
               </div>
             </div>
             <div>
