@@ -79,6 +79,23 @@ def test_plan_trip_no_route_found(mock_geocode, mock_route):
     assert resp.json()["error"] == "no_route_found"
 
 
+def test_plan_trip_invalid_cycle_hours_reports_specific_field():
+    client = APIClient()
+    payload = {
+        "current_location": "Chicago, IL",
+        "pickup_location": "Chicago, IL",
+        "dropoff_location": "Indianapolis, IN",
+        "current_cycle_used_hrs": 999.0,
+    }
+    resp = client.post("/api/trips/plan/", payload, format="json")
+
+    assert resp.status_code == 422
+    data = resp.json()
+    assert data["error"] == "invalid_input"
+    assert data["field"] == "current_cycle_used_hrs"
+    assert "message" in data
+
+
 def test_trip_list_empty():
     client = APIClient()
     resp = client.get("/api/trips/")

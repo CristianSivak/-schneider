@@ -110,7 +110,7 @@ export default function LocationAutocomplete({
           role="combobox"
           aria-expanded={isOpen}
           aria-autocomplete="list"
-          className={`w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+          className={`w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 ${
             error ? 'border-red-400' : 'border-gray-300'
           }`}
         />
@@ -125,8 +125,8 @@ export default function LocationAutocomplete({
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => selectSuggestion(s)}
-                className={`block w-full px-3 py-2 text-left hover:bg-blue-50 ${
-                  i === highlightedIndex ? 'bg-blue-50' : ''
+                className={`block w-full px-3 py-2 text-left hover:bg-brand-50 ${
+                  i === highlightedIndex ? 'bg-brand-50' : ''
                 }`}
               >
                 {s.display_name}

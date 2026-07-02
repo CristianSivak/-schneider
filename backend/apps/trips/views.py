@@ -22,7 +22,12 @@ class LocationSearchView(APIView):
 class TripPlanView(APIView):
     def post(self, request):
         req = TripPlanRequestSerializer(data=request.data)
-        req.is_valid(raise_exception=True)
+        if not req.is_valid():
+            field, field_errors = next(iter(req.errors.items()))
+            return Response(
+                {"error": "invalid_input", "field": field, "message": str(field_errors[0])},
+                status=422,
+            )
         d = req.validated_data
 
         try:

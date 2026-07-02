@@ -89,17 +89,39 @@ export default function TripForm({ onSubmit, isSubmitting, fieldError }: TripFor
           onChange={setCycleUsed}
           type="number"
           placeholder="10"
+          error={fieldError?.field === 'current_cycle_used_hrs' ? fieldError.message : undefined}
         />
       </div>
 
-      <details className="rounded-lg border border-gray-200 p-3">
+      <details
+        className="rounded-lg border border-gray-200 p-3"
+        open={['driver_name', 'carrier_name', 'truck_number'].includes(fieldError?.field ?? '')}
+      >
         <summary className="cursor-pointer text-sm font-medium text-gray-700">
           Optional: driver &amp; carrier details
         </summary>
         <div className="mt-3 grid gap-4 sm:grid-cols-3">
-          <Field label="Driver Name" value={driverName} onChange={setDriverName} placeholder="Driver" />
-          <Field label="Carrier Name" value={carrierName} onChange={setCarrierName} placeholder="N/A" />
-          <Field label="Truck Number" value={truckNumber} onChange={setTruckNumber} placeholder="N/A" />
+          <Field
+            label="Driver Name"
+            value={driverName}
+            onChange={setDriverName}
+            placeholder="Driver"
+            error={fieldError?.field === 'driver_name' ? fieldError.message : undefined}
+          />
+          <Field
+            label="Carrier Name"
+            value={carrierName}
+            onChange={setCarrierName}
+            placeholder="N/A"
+            error={fieldError?.field === 'carrier_name' ? fieldError.message : undefined}
+          />
+          <Field
+            label="Truck Number"
+            value={truckNumber}
+            onChange={setTruckNumber}
+            placeholder="N/A"
+            error={fieldError?.field === 'truck_number' ? fieldError.message : undefined}
+          />
         </div>
       </details>
 
@@ -109,7 +131,7 @@ export default function TripForm({ onSubmit, isSubmitting, fieldError }: TripFor
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-lg bg-blue-600 px-4 py-2.5 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-lg bg-brand-500 px-4 py-2.5 font-medium text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? 'Planning trip…' : 'Plan Trip'}
       </button>
@@ -140,7 +162,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        className={`w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 ${
           error ? 'border-red-400' : 'border-gray-300'
         }`}
       />

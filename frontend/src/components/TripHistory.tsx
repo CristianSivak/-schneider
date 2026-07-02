@@ -23,7 +23,7 @@ export default function TripHistory({
               type="button"
               onClick={() => onSelect(t.id)}
               className={`w-full rounded-lg px-3 py-2 text-left text-sm transition hover:bg-gray-50 ${
-                selectedId === t.id ? 'bg-blue-50 ring-1 ring-blue-200' : ''
+                selectedId === t.id ? 'bg-brand-50 ring-1 ring-brand-200' : ''
               }`}
             >
               <div className="font-medium text-gray-900">

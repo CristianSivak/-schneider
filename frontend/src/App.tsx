@@ -57,9 +57,16 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="border-b border-gray-200 bg-white px-6 py-4">
-        <h1 className="text-xl font-semibold text-gray-900">ELD Trip Planner</h1>
-        <p className="text-sm text-gray-500">Route planning and FMCSA daily log sheets for property-carrying drivers</p>
+      <header className="border-b-4 border-brand-500 bg-white px-6 py-4">
+        <div className="mx-auto flex max-w-6xl items-center gap-3">
+          <img src="/schneider-logo.png" alt="Schneider" className="h-10 w-10 rounded" />
+          <div>
+            <h1 className="text-xl font-semibold text-gray-900">
+              ELD Trip Planner
+            </h1>
+            <p className="text-sm text-gray-500">Route planning and FMCSA daily log sheets for property-carrying drivers</p>
+          </div>
+        </div>
       </header>
 
       <main className="mx-auto max-w-6xl p-6">
