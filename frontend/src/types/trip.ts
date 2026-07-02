@@ -80,6 +80,12 @@ export interface Trip {
   error_message: string
 }
 
+export interface LocationSuggestion {
+  display_name: string
+  lat: number
+  lng: number
+}
+
 export interface TripListItem {
   id: string
   created_at: string

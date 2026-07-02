@@ -10,8 +10,11 @@ day of the trip).
 - **Backend**: Django + Django REST Framework. A pure-Python HOS/ELD rules engine
   (`backend/apps/trips/hos/`) computes the duty-status schedule; Django only handles
   HTTP, persistence, and orchestration.
-- **Geocoding/Routing**: OpenStreetMap Nominatim (geocoding) + the public OSRM demo
-  server (routing). Both free, no API keys required, called server-side.
+- **Geocoding/Routing**: OpenStreetMap Nominatim (final geocoding at plan time) + the
+  public OSRM demo server (routing), plus Photon (photon.komoot.io) for the location
+  typeahead/autocomplete in the trip form -- Nominatim's `/search` only matches
+  complete words, so Photon (built on the same OSM data) handles partial-word
+  suggestions as the user types. All free, no API keys required, called server-side.
 - **Map**: React + react-leaflet + OpenStreetMap tiles.
 - **Daily log sheets**: rendered as SVG, matching the standard FMCSA "Driver's Daily
   Log (24 hours)" paper form layout.
@@ -68,6 +71,7 @@ npm run dev   # http://localhost:5173
 - `POST /api/trips/plan/` — body: `{ current_location, pickup_location, dropoff_location, current_cycle_used_hrs, driver_name?, carrier_name?, truck_number? }`. Returns the full `Trip` object (route geometry, stops, and daily log sheets).
 - `GET /api/trips/` — recent trip history.
 - `GET /api/trips/<uuid>/` — full trip detail.
+- `GET /api/locations/search/?q=<partial text>` — up to 6 "City, State" suggestions for the location autocomplete (minimum 3 characters).
 
 Error responses are shaped `{ "error": "<code>", "message": "...", "field"?: "..." }`
 with HTTP 422 for bad input (unresolvable location, no drivable route) and 502 if the

@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import LocationAutocomplete from './LocationAutocomplete'
 import type { TripPlanRequest } from '../types/trip'
 
 interface FieldError {
@@ -61,21 +62,21 @@ export default function TripForm({ onSubmit, isSubmitting, fieldError }: TripFor
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field
+        <LocationAutocomplete
           label="Current Location"
           value={currentLocation}
           onChange={setCurrentLocation}
           placeholder="Chicago, IL"
           error={fieldError?.field === 'current_location' ? fieldError.message : undefined}
         />
-        <Field
+        <LocationAutocomplete
           label="Pickup Location"
           value={pickupLocation}
           onChange={setPickupLocation}
           placeholder="Chicago, IL"
           error={fieldError?.field === 'pickup_location' ? fieldError.message : undefined}
         />
-        <Field
+        <LocationAutocomplete
           label="Dropoff Location"
           value={dropoffLocation}
           onChange={setDropoffLocation}

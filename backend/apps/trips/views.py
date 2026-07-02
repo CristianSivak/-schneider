@@ -6,8 +6,17 @@ from rest_framework.views import APIView
 from .hos.engine import plan_trip
 from .models import Trip
 from .serializers import TripListSerializer, TripPlanRequestSerializer, TripSerializer
-from .services.geocoding import LocationNotFoundError, geocode
+from .services.geocoding import LocationNotFoundError, geocode, search_locations
 from .services.routing import NoRouteFoundError, RoutingServiceError, get_route
+
+
+class LocationSearchView(APIView):
+    def get(self, request):
+        query = request.query_params.get("q", "").strip()
+        if len(query) < 3:
+            return Response({"results": []})
+        results = search_locations(query)
+        return Response({"results": results})
 
 
 class TripPlanView(APIView):
