@@ -1,7 +1,10 @@
+from datetime import datetime, timezone as dt_timezone
 from unittest.mock import patch
 
 import pytest
 from rest_framework.test import APIClient
+
+FIXED_TRIP_START = datetime(2024, 1, 15, 8, 0, tzinfo=dt_timezone.utc)
 
 from apps.trips.models import Trip
 from apps.trips.services.geocoding import GeoPoint, LocationNotFoundError
@@ -27,9 +30,10 @@ def _fake_get_route(points):
     )
 
 
+@patch("apps.trips.views.timezone.now", return_value=FIXED_TRIP_START)
 @patch("apps.trips.views.get_route", side_effect=_fake_get_route)
 @patch("apps.trips.views.geocode", side_effect=_fake_geocode)
-def test_plan_trip_success(mock_geocode, mock_route):
+def test_plan_trip_success(mock_geocode, mock_route, mock_now):
     client = APIClient()
     payload = {
         "current_location": "Chicago, IL",
